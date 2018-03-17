@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="./src/main/resources/liquibase/updates/person.xml">
+
+    <changeSet id="20180317-0029" author="rowanpi">
+        <createTable tableName="mvbc_uploaded_sermons">
+          <column name="id" type="BIGINT(20)">
+            <constraints primaryKey="true" />
+          </column>
+          <column name="title" type="varchar(512)">
+            <constraints unique="true" />
+          </column>
+          <column name="sermon_date" type="date" />
+          <column name="sermon_audio" type="varchar(512)" />
+          <column name="bible_passage" type="varchar(512)" />
+          <column name="preacher" type="BIGINT" >
+            <constraints foreignKeyName="fk_preacher_id" references="preacher(id)"/>
+          </column>
+          <column name="service_type" type="BIGINT" >
+            <constraints foreignKeyName="fk_service_type_id" references="service_type(id)"/>
+          </column>
+          <column name="featured_media" type="BIGINT" />
+        </createTable>s
+    </changeSet>
+</databaseChangeLog>

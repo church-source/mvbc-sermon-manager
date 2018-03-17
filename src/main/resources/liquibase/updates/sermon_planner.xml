@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="./src/main/resources/liquibase/updates/person.xml">
+
+    <changeSet id="20180312-0029" author="rowanpi">
+        <createTable tableName="sermon_planner">
+          <column name="id" type="BIGINT(20)"  autoIncrement="true">
+            <constraints primaryKey="true" />
+          </column>
+          <column name="updated" type="datetime" />
+          <column name="unique_google_id" type="varchar(255)">
+            <constraints unique="true" />
+          </column>
+          <column name="date" type="date" />
+          <column name="service" type="varchar(255)" />
+          <column name="preacher" type="varchar(255)" />
+          <column name="title" type="varchar(255)" />
+          <column name="passage" type="varchar(255)" />
+          <column name="series" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
