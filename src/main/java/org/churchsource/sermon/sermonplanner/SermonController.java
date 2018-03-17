@@ -1,4 +1,4 @@
-package org.churchsource.sermon.sermon;
+package org.churchsource.sermon.sermonplanner;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class SermonController {
     GoogleSheetSermonPlanner sermonPlanner = restTemplate.getForObject(SERMON_PLANNER_LINK, GoogleSheetSermonPlanner.class);
     for(Entry plannerEntry: sermonPlanner.getFeed().getEntry()) {
       SermonPlannerItem item = sermonPlannerFactory.createSermonPlannerItem(plannerEntry);
-      sermonPlannerRepository.saveSermonPlanningItem(item);
+      sermonPlannerRepository.saveOrUpdateSermonPlanningItem(item);
       log.info(item.toString());
     }
     

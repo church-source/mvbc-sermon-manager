@@ -1,4 +1,4 @@
-package org.churchsource.sermon.sermon;
+package org.churchsource.sermon.sermonplanner;
 
 import java.text.DateFormat;
 import java.text.ParseException;

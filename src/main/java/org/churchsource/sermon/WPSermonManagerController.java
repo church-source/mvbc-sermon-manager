@@ -6,6 +6,8 @@ import org.churchsource.sermon.book.Book;
 import org.churchsource.sermon.book.BookFactory;
 import org.churchsource.sermon.book.BookRepository;
 import org.churchsource.sermon.book.wp.WPSermonBook;
+import org.churchsource.sermon.googlesheet.planner.Entry;
+import org.churchsource.sermon.googlesheet.planner.GoogleSheetSermonPlanner;
 import org.churchsource.sermon.preacher.Preacher;
 import org.churchsource.sermon.preacher.PreacherFactory;
 import org.churchsource.sermon.preacher.PreacherRepository;
@@ -14,6 +16,9 @@ import org.churchsource.sermon.series.Series;
 import org.churchsource.sermon.series.SeriesFactory;
 import org.churchsource.sermon.series.SeriesRepository;
 import org.churchsource.sermon.series.wp.WPSermonSeries;
+import org.churchsource.sermon.sermonplanner.SermonPlannerFactory;
+import org.churchsource.sermon.sermonplanner.SermonPlannerItem;
+import org.churchsource.sermon.sermonplanner.SermonPlannerRepository;
 import org.churchsource.sermon.service.ServiceType;
 import org.churchsource.sermon.service.ServiceTypeFactory;
 import org.churchsource.sermon.service.ServiceTypeRepository;
@@ -32,6 +37,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("wpsermonmanager")
 @Slf4j
 public class WPSermonManagerController {
+
+  private static final String SERMON_PLANNER_LINK 
+    = "https://spreadsheets.google.com/feeds/list/19fmsMGR_yNdaGO3vXZHpEaPe6W3x279orFcbXwx7UtQ/2/public/values?alt=json";
 
   @Autowired
   private PreacherRepository preacherRepository;
@@ -57,6 +65,12 @@ public class WPSermonManagerController {
   @Autowired
   private BookFactory bookFactory;
 
+  @Autowired
+  private SermonPlannerRepository sermonPlannerRepository;
+
+  @Autowired
+  private SermonPlannerFactory sermonPlannerFactory;
+
   @GetMapping("/preacher/{id}")
   public Preacher getPreacher(@PathVariable Long id) {
     return preacherRepository.getPreacherById(id);
@@ -68,8 +82,9 @@ public class WPSermonManagerController {
   }
 
   @RequestMapping(value = "/sync", method = RequestMethod.POST)
-  public String sync() {
+  public String sync() throws Exception {
     RestTemplate restTemplate = new RestTemplate();
+    syncSermonPlanner(restTemplate);
     syncPreachers(restTemplate);
     syncServiceTypes(restTemplate);
     syncSermonSeries(restTemplate);
@@ -110,6 +125,15 @@ public class WPSermonManagerController {
       Book aBook = bookFactory.createEntity(wpSermonBook);
       bookRepository.saveNewOrUpdateExistingBook(aBook);
       log.info(wpSermonBook.toString());
+    }
+  }
+
+  private void syncSermonPlanner(RestTemplate restTemplate) throws Exception {
+    GoogleSheetSermonPlanner sermonPlanner = restTemplate.getForObject(SERMON_PLANNER_LINK, GoogleSheetSermonPlanner.class);
+    for(Entry plannerEntry: sermonPlanner.getFeed().getEntry()) {
+      SermonPlannerItem item = sermonPlannerFactory.createSermonPlannerItem(plannerEntry);
+      sermonPlannerRepository.saveOrUpdateSermonPlanningItem(item);
+      log.info(item.toString());
     }
   }
 }
