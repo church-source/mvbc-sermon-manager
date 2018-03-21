@@ -3,6 +3,7 @@ package org.churchsource.sermon.mvbcuploaded;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,14 +42,19 @@ public class MvbcUploadedSermon extends SermonManagerEntity <Long> {
 
   private String sermonAudio;
 
+  private String sermonAudioFileName;
+
   private String biblePassage;
 
+  @ManyToOne
   private Preacher preacher;
 
+  @ManyToOne
   private ServiceType serviceType;
 
+  @ManyToOne
   private Series series;
 
-  private String featured_media; 
+  private int featuredMedia; 
 
 }

@@ -26,7 +26,7 @@ public class MvbcUploadedSermonRepository extends AbstractRepository<MvbcUploade
     return series == null || series.isEmpty() ? null : series.get(0); 
   }
 
-  public void saveNewOrUpdateExistingSeries(MvbcUploadedSermon aSermon) {
+  public void saveNewOrUpdateExistingUploadedSermon(MvbcUploadedSermon aSermon) {
     if(getMvbcUploadedSermonById(aSermon.getId()) != null) {
       update(aSermon);
     } else {

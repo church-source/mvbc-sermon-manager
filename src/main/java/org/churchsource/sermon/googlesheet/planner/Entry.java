@@ -11,8 +11,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import lombok.ToString;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
@@ -23,12 +21,12 @@ import lombok.ToString;
     "link",
     "gsx$date",
     "gsx$service",
+    "gsx$ampm",
     "gsx$preacher",
     "gsx$title",
     "gsx$passage",
     "gsx$series"
 })
-@ToString
 public class Entry {
 
     @JsonProperty("id")
@@ -47,6 +45,8 @@ public class Entry {
     private Gsx$date gsx$date;
     @JsonProperty("gsx$service")
     private Gsx$service gsx$service;
+    @JsonProperty("gsx$ampm")
+    private Gsx$ampm gsx$ampm;
     @JsonProperty("gsx$preacher")
     private Gsx$preacher gsx$preacher;
     @JsonProperty("gsx$title")
@@ -136,6 +136,16 @@ public class Entry {
     @JsonProperty("gsx$service")
     public void setGsx$service(Gsx$service gsx$service) {
         this.gsx$service = gsx$service;
+    }
+
+    @JsonProperty("gsx$ampm")
+    public Gsx$ampm getGsx$ampm() {
+        return gsx$ampm;
+    }
+
+    @JsonProperty("gsx$ampm")
+    public void setGsx$ampm(Gsx$ampm gsx$ampm) {
+        this.gsx$ampm = gsx$ampm;
     }
 
     @JsonProperty("gsx$preacher")

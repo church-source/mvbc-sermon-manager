@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "$t"
 })
-public class Gsx$title {
+public class Gsx$ampm {
 
     @JsonProperty("$t")
     private String $t;

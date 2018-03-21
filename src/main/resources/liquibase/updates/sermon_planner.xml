@@ -13,6 +13,7 @@
             <constraints unique="true" />
           </column>
           <column name="date" type="date" />
+          <column name="am_or_pm" type="INT" />
           <column name="service" type="varchar(255)" />
           <column name="preacher" type="varchar(255)" />
           <column name="title" type="varchar(255)" />

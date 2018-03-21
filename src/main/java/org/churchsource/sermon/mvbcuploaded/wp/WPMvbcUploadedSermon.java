@@ -79,15 +79,15 @@ public class WPMvbcUploadedSermon {
     @JsonProperty("template")
     private String template;
     @JsonProperty("wpfc_preacher")
-    private List<Integer> wpfcPreacher = null;
+    private List<Long> wpfcPreacher = null;
     @JsonProperty("wpfc_sermon_series")
-    private List<Object> wpfcSermonSeries = null;
+    private List<Long> wpfcSermonSeries = null;
     @JsonProperty("wpfc_sermon_topics")
-    private List<Object> wpfcSermonTopics = null;
+    private List<Long> wpfcSermonTopics = null;
     @JsonProperty("wpfc_bible_book")
-    private List<Integer> wpfcBibleBook = null;
+    private List<Long> wpfcBibleBook = null;
     @JsonProperty("wpfc_service_type")
-    private List<Integer> wpfcServiceType = null;
+    private List<Long> wpfcServiceType = null;
     @JsonProperty("sermon_audio")
     private String sermonAudio;
     @JsonProperty("sermon_audio_duration")
@@ -266,52 +266,52 @@ public class WPMvbcUploadedSermon {
     }
 
     @JsonProperty("wpfc_preacher")
-    public List<Integer> getWpfcPreacher() {
+    public List<Long> getWpfcPreacher() {
         return wpfcPreacher;
     }
 
     @JsonProperty("wpfc_preacher")
-    public void setWpfcPreacher(List<Integer> wpfcPreacher) {
+    public void setWpfcPreacher(List<Long> wpfcPreacher) {
         this.wpfcPreacher = wpfcPreacher;
     }
 
     @JsonProperty("wpfc_sermon_series")
-    public List<Object> getWpfcSermonSeries() {
+    public List<Long> getWpfcSermonSeries() {
         return wpfcSermonSeries;
     }
 
     @JsonProperty("wpfc_sermon_series")
-    public void setWpfcSermonSeries(List<Object> wpfcSermonSeries) {
+    public void setWpfcSermonSeries(List<Long> wpfcSermonSeries) {
         this.wpfcSermonSeries = wpfcSermonSeries;
     }
 
     @JsonProperty("wpfc_sermon_topics")
-    public List<Object> getWpfcSermonTopics() {
+    public List<Long> getWpfcSermonTopics() {
         return wpfcSermonTopics;
     }
 
     @JsonProperty("wpfc_sermon_topics")
-    public void setWpfcSermonTopics(List<Object> wpfcSermonTopics) {
+    public void setWpfcSermonTopics(List<Long> wpfcSermonTopics) {
         this.wpfcSermonTopics = wpfcSermonTopics;
     }
 
     @JsonProperty("wpfc_bible_book")
-    public List<Integer> getWpfcBibleBook() {
+    public List<Long> getWpfcBibleBook() {
         return wpfcBibleBook;
     }
 
     @JsonProperty("wpfc_bible_book")
-    public void setWpfcBibleBook(List<Integer> wpfcBibleBook) {
+    public void setWpfcBibleBook(List<Long> wpfcBibleBook) {
         this.wpfcBibleBook = wpfcBibleBook;
     }
 
     @JsonProperty("wpfc_service_type")
-    public List<Integer> getWpfcServiceType() {
+    public List<Long> getWpfcServiceType() {
         return wpfcServiceType;
     }
 
     @JsonProperty("wpfc_service_type")
-    public void setWpfcServiceType(List<Integer> wpfcServiceType) {
+    public void setWpfcServiceType(List<Long> wpfcServiceType) {
         this.wpfcServiceType = wpfcServiceType;
     }
 

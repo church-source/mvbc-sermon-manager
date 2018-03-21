@@ -39,6 +39,8 @@ public class SermonPlannerItem extends SermonManagerEntityWithAutoIncrement <Lon
 
   private Date date;
 
+  private SermonServiceAmPm amOrPm;
+
   private String service;
 
   private String preacher;

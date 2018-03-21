@@ -38,9 +38,13 @@ public class SermonPlannerFactory {
     if(sermonPlannerGoogleEntry.getGsx$date() != null) {
       sermonPlannerItem.setDate(sermon_date_format.parse(sermonPlannerGoogleEntry.getGsx$date().get$t()));
     }
+    if(sermonPlannerGoogleEntry.getGsx$ampm() != null) {
+      sermonPlannerItem.setAmOrPm(SermonServiceAmPm.valueOf(sermonPlannerGoogleEntry.getGsx$ampm().get$t().toUpperCase()));
+    }
     if(sermonPlannerGoogleEntry.getGsx$service() != null) {
       sermonPlannerItem.setService(sermonPlannerGoogleEntry.getGsx$service().get$t());
     }
+    
     if(sermonPlannerGoogleEntry.getGsx$preacher() != null) {
       sermonPlannerItem.setPreacher(sermonPlannerGoogleEntry.getGsx$preacher().get$t());
     }

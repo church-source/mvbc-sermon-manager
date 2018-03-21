@@ -13,17 +13,18 @@
           </column>
           <column name="sermon_date" type="date" />
           <column name="sermon_audio" type="varchar(512)" />
+          <column name="sermon_audio_file_name" type="varchar(255)" />
           <column name="bible_passage" type="varchar(512)" />
-          <column name="preacher" type="BIGINT" >
+          <column name="preacher_id" type="BIGINT" >
             <constraints foreignKeyName="fk_preacher_id" references="preacher(id)"/>
           </column>
-          <column name="service_type" type="BIGINT" >
+          <column name="service_type_id" type="BIGINT" >
             <constraints foreignKeyName="fk_service_type_id" references="service_type(id)"/>
           </column>
-          <column name="series" type="BIGINT" >
+          <column name="series_id" type="BIGINT" >
             <constraints foreignKeyName="fk_series_id" references="series(id)"/>
           </column>
-          <column name="featured_media" type="BIGINT" />
+          <column name="featured_media" type="INT" />
         </createTable>
     </changeSet>
 </databaseChangeLog>

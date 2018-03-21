@@ -1,5 +1,6 @@
 package org.churchsource.sermon;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.churchsource.sermon.book.Book;
@@ -8,6 +9,10 @@ import org.churchsource.sermon.book.BookRepository;
 import org.churchsource.sermon.book.wp.WPSermonBook;
 import org.churchsource.sermon.googlesheet.planner.Entry;
 import org.churchsource.sermon.googlesheet.planner.GoogleSheetSermonPlanner;
+import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermon;
+import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermonFactory;
+import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermonRepository;
+import org.churchsource.sermon.mvbcuploaded.wp.WPMvbcUploadedSermon;
 import org.churchsource.sermon.preacher.Preacher;
 import org.churchsource.sermon.preacher.PreacherFactory;
 import org.churchsource.sermon.preacher.PreacherRepository;
@@ -71,6 +76,13 @@ public class WPSermonManagerController {
   @Autowired
   private SermonPlannerFactory sermonPlannerFactory;
 
+  @Autowired
+  private MvbcUploadedSermonFactory mvbcUploadedSermonFactory;
+
+  @Autowired
+  private MvbcUploadedSermonRepository mvbcUploadedSermonRepository;
+
+
   @GetMapping("/preacher/{id}")
   public Preacher getPreacher(@PathVariable Long id) {
     return preacherRepository.getPreacherById(id);
@@ -89,6 +101,7 @@ public class WPSermonManagerController {
     syncServiceTypes(restTemplate);
     syncSermonSeries(restTemplate);
     syncSermonBooks(restTemplate);
+    syncUploadedSermons(restTemplate);
     return null;
   }
 
@@ -128,6 +141,15 @@ public class WPSermonManagerController {
     }
   }
 
+  private void syncUploadedSermons(RestTemplate restTemplate) throws MalformedURLException {
+    WPMvbcUploadedSermon[] wpSermons = restTemplate.getForObject("https://www.mountainviewbaptist.co.za/wp-json/wp/v2/wpfc_sermon?per_page=100", WPMvbcUploadedSermon[].class);
+    for(WPMvbcUploadedSermon wpSermon: wpSermons) {
+      MvbcUploadedSermon mvbcUploadedSermon = mvbcUploadedSermonFactory.createEntity(wpSermon);
+      mvbcUploadedSermonRepository.saveNewOrUpdateExistingUploadedSermon(mvbcUploadedSermon);
+      log.info(mvbcUploadedSermon.toString());
+    }
+  }
+
   private void syncSermonPlanner(RestTemplate restTemplate) throws Exception {
     GoogleSheetSermonPlanner sermonPlanner = restTemplate.getForObject(SERMON_PLANNER_LINK, GoogleSheetSermonPlanner.class);
     for(Entry plannerEntry: sermonPlanner.getFeed().getEntry()) {
@@ -136,4 +158,5 @@ public class WPSermonManagerController {
       log.info(item.toString());
     }
   }
+  
 }
