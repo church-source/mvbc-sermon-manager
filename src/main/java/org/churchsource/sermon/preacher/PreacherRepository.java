@@ -33,4 +33,10 @@ public class PreacherRepository extends AbstractRepository<Preacher> {
       save(aPreacherEntity);
     }
   }
+
+  public Preacher getPreacherByName(String preacherName) {
+    List<Preacher> preachers = em.createNamedQuery(PreacherNamedQueryConstants.NAME_FIND_PREACHER_BY_NAME, Preacher.class).setParameter("name", preacherName)
+        .getResultList();
+    return preachers == null || preachers.isEmpty() ? null : preachers.get(0); 
+  }
 }

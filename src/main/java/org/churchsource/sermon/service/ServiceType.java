@@ -23,6 +23,7 @@ import lombok.ToString;
 @Table(name="service_type")
 @NamedQueries({
   @NamedQuery(name = ServiceTypeNamedQueryConstants.NAME_FIND_SERVICE_TYPE_BY_ID, query = ServiceTypeNamedQueryConstants.QUERY_FIND_SERVICE_TYPE_BY_ID),
+  @NamedQuery(name = ServiceTypeNamedQueryConstants.NAME_FIND_SERVICE_TYPE_BY_NAME, query = ServiceTypeNamedQueryConstants.QUERY_FIND_SERVICE_TYPE_BY_NAME),
   @NamedQuery(name = ServiceTypeNamedQueryConstants.NAME_FIND_ALL_SERVICE_TYPES, query = ServiceTypeNamedQueryConstants.QUERY_FIND_ALL_SERVICE_TYPES)})
 public class ServiceType extends SermonManagerEntity <Long> {
 

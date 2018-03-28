@@ -33,4 +33,10 @@ public class ServiceTypeRepository extends AbstractRepository<ServiceType> {
       save(aServiceType);
     }
   }
+
+  public ServiceType getServiceTypeByName(String serviceTypeName) {
+    List<ServiceType> serviceTypes = em.createNamedQuery(ServiceTypeNamedQueryConstants.NAME_FIND_SERVICE_TYPE_BY_NAME, ServiceType.class).setParameter("name", serviceTypeName)
+        .getResultList();
+    return serviceTypes == null || serviceTypes.isEmpty() ? null : serviceTypes.get(0);
+  }
 }

@@ -22,6 +22,7 @@ import lombok.ToString;
 @Table(name="series")
 @NamedQueries({
   @NamedQuery(name = SeriesNamedQueryConstants.NAME_FIND_SERIES_BY_ID, query = SeriesNamedQueryConstants.QUERY_FIND_SERIES_BY_ID),
+  @NamedQuery(name = SeriesNamedQueryConstants.NAME_FIND_SERIES_BY_NAME, query = SeriesNamedQueryConstants.QUERY_FIND_SERIES_BY_NAME),
   @NamedQuery(name = SeriesNamedQueryConstants.NAME_FIND_ALL_SERIES, query = SeriesNamedQueryConstants.QUERY_FIND_ALL_SERIES)})
 public class Series extends SermonManagerEntity <Long> {
 

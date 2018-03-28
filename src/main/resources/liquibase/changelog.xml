@@ -9,4 +9,5 @@
     <include file="liquibase/updates/series.xml"/>
     <include file="liquibase/updates/book.xml"/>
     <include file="liquibase/updates/mvbc_uploaded_sermons.xml"/>
+    <include file="liquibase/updates/media_items.xml"/>
 </databaseChangeLog>

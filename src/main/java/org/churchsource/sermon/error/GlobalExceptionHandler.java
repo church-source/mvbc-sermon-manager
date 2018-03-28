@@ -25,6 +25,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ExceptionResponse> handleUnhandledException(Exception exception) {
     log.error(exception.getMessage(), exception);
+    log.info(exception.getMessage());
+    log.info(exception.getStackTrace().toString());
     return ResponseEntity
         .status(INTERNAL_SERVER_ERROR)
         .contentType(MediaType.APPLICATION_JSON)

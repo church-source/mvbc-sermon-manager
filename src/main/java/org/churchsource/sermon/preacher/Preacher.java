@@ -24,6 +24,7 @@ import lombok.ToString;
 @Table(name="preacher")
 @NamedQueries({
   @NamedQuery(name = PreacherNamedQueryConstants.NAME_FIND_PREACHER_BY_ID, query = PreacherNamedQueryConstants.QUERY_FIND_PREACHER_BY_ID),
+  @NamedQuery(name = PreacherNamedQueryConstants.NAME_FIND_PREACHER_BY_NAME, query = PreacherNamedQueryConstants.QUERY_FIND_PREACHER_BY_NAME),
   @NamedQuery(name = PreacherNamedQueryConstants.NAME_FIND_ALL_PREACHERS, query = PreacherNamedQueryConstants.QUERY_FIND_ALL_PREACHERS)})
 public class Preacher extends SermonManagerEntity <Long> {
 

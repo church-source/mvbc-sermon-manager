@@ -1,5 +1,6 @@
 package org.churchsource.sermon.sermonplanner;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,14 @@ public class SermonPlannerRepository extends AbstractRepository<SermonPlannerIte
 
   public SermonPlannerItem getSermonPlannerById(Long id) {
     List<SermonPlannerItem> sermonPlannerItems = em.createNamedQuery(SermonPlannerNamedQueryConstants.NAME_FIND_SERMON_PLANNER_ITEM_BY_ID, SermonPlannerItem.class).setParameter("id", id)
+        .getResultList();
+    return sermonPlannerItems == null || sermonPlannerItems.isEmpty() ? null : sermonPlannerItems.get(0); 
+  }
+  
+  public SermonPlannerItem getSermonPlannerItemByDateAndServiceTime(Date date, String amOrPm) {
+    List<SermonPlannerItem> sermonPlannerItems = em.createNamedQuery(SermonPlannerNamedQueryConstants.NAME_FIND_SERMON_PLANNER_ITEM_BY_DATE_AND_TIME, SermonPlannerItem.class)
+        .setParameter("date", date)
+        .setParameter("amOrPm", SermonServiceAmPm.valueOf(amOrPm.toUpperCase()))
         .getResultList();
     return sermonPlannerItems == null || sermonPlannerItems.isEmpty() ? null : sermonPlannerItems.get(0); 
   }

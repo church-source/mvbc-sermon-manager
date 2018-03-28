@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import liquibase.util.file.FilenameUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Transactional(readOnly = true)
 @Service
+@Slf4j
 public class MvbcUploadedSermonFactory {
 
   @Autowired
@@ -42,8 +44,12 @@ public class MvbcUploadedSermonFactory {
     String sermonAudioUrl = wpMvbcUploadedSermon.getSermonAudio();
     aMvbcUploadedSermon.setSermonAudio(sermonAudioUrl);
     if(sermonAudioUrl != null) {
-      URL url = new URL(sermonAudioUrl);
-      aMvbcUploadedSermon.setSermonAudioFileName(FilenameUtils.getName(url.getPath()).replaceAll("%20", " "));
+      try {
+        URL url = new URL(sermonAudioUrl);
+        aMvbcUploadedSermon.setSermonAudioFileName(FilenameUtils.getName(url.getPath()).replaceAll("%20", " "));
+      } catch (Exception e) {
+        log.error(e.getMessage());
+      }
     }
     
     aMvbcUploadedSermon.setBiblePassage(wpMvbcUploadedSermon.getBiblePassage());

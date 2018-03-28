@@ -28,6 +28,7 @@ import lombok.ToString;
 @Table(name="mvbc_uploaded_sermons")
 @NamedQueries({
   @NamedQuery(name = MvbcNamedQueryConstants.NAME_FIND_UPLOADED_SERMON_BY_ID, query = MvbcNamedQueryConstants.QUERY_FIND_UPLOADED_SERMON_BY_ID),
+  @NamedQuery(name = MvbcNamedQueryConstants.NAME_FIND_UPLOADED_SERMON_BY_FILENAME, query = MvbcNamedQueryConstants.QUERY_FIND_UPLOADED_SERMON_BY_FILENAME),
   @NamedQuery(name = MvbcNamedQueryConstants.NAME_FIND_ALL_UPLOADED_SERMONS, query = MvbcNamedQueryConstants.QUERY_FIND_ALL_UPLOADED_SERMONS)})
 public class MvbcUploadedSermon extends SermonManagerEntity <Long> {
 
@@ -55,6 +56,6 @@ public class MvbcUploadedSermon extends SermonManagerEntity <Long> {
   @ManyToOne
   private Series series;
 
-  private int featuredMedia; 
+  private long featuredMedia; 
 
 }

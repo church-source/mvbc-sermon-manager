@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.ToString;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
@@ -46,6 +48,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "_sermon_date_auto",
     "_links"
 })
+@ToString
 public class WPMvbcUploadedSermon {
 
     @JsonProperty("id")
@@ -71,7 +74,7 @@ public class WPMvbcUploadedSermon {
     @JsonProperty("title")
     private Title title;
     @JsonProperty("featured_media")
-    private Integer featuredMedia;
+    private Long featuredMedia;
     @JsonProperty("comment_status")
     private String commentStatus;
     @JsonProperty("ping_status")
@@ -107,7 +110,7 @@ public class WPMvbcUploadedSermon {
     @JsonProperty("_featured_url")
     private String featuredUrl;
     @JsonProperty("sermon_date")
-    private Integer sermonDate;
+    private Long sermonDate;
     @JsonProperty("_sermon_date_auto")
     private Boolean sermonDateAuto;
     @JsonProperty("_links")
@@ -226,12 +229,12 @@ public class WPMvbcUploadedSermon {
     }
 
     @JsonProperty("featured_media")
-    public Integer getFeaturedMedia() {
+    public Long getFeaturedMedia() {
         return featuredMedia;
     }
 
     @JsonProperty("featured_media")
-    public void setFeaturedMedia(Integer featuredMedia) {
+    public void setFeaturedMedia(Long featuredMedia) {
         this.featuredMedia = featuredMedia;
     }
 
@@ -406,12 +409,12 @@ public class WPMvbcUploadedSermon {
     }
 
     @JsonProperty("sermon_date")
-    public Integer getSermonDate() {
+    public Long getSermonDate() {
         return sermonDate;
     }
 
     @JsonProperty("sermon_date")
-    public void setSermonDate(Integer sermonDate) {
+    public void setSermonDate(Long sermonDate) {
         this.sermonDate = sermonDate;
     }
 

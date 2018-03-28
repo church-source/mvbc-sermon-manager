@@ -9,6 +9,11 @@ import org.churchsource.sermon.book.BookRepository;
 import org.churchsource.sermon.book.wp.WPSermonBook;
 import org.churchsource.sermon.googlesheet.planner.Entry;
 import org.churchsource.sermon.googlesheet.planner.GoogleSheetSermonPlanner;
+import org.churchsource.sermon.media.MediaItem;
+import org.churchsource.sermon.media.MediaItemFactory;
+import org.churchsource.sermon.media.MediaItemRepository;
+import org.churchsource.sermon.media.MediaItemService;
+import org.churchsource.sermon.media.wp.WPMedia;
 import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermon;
 import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermonFactory;
 import org.churchsource.sermon.mvbcuploaded.MvbcUploadedSermonRepository;
@@ -82,7 +87,15 @@ public class WPSermonManagerController {
   @Autowired
   private MvbcUploadedSermonRepository mvbcUploadedSermonRepository;
 
+  @Autowired
+  private MediaItemFactory mediaItemFactory;
 
+  @Autowired
+  private MediaItemRepository mediaItemRepository;
+
+  @Autowired
+  private MediaItemService mediaItemService; 
+  
   @GetMapping("/preacher/{id}")
   public Preacher getPreacher(@PathVariable Long id) {
     return preacherRepository.getPreacherById(id);
@@ -102,6 +115,8 @@ public class WPSermonManagerController {
     syncSermonSeries(restTemplate);
     syncSermonBooks(restTemplate);
     syncUploadedSermons(restTemplate);
+    syncMediaItems(restTemplate);
+
     return null;
   }
 
@@ -158,5 +173,19 @@ public class WPSermonManagerController {
       log.info(item.toString());
     }
   }
+
+  private void syncMediaItems(RestTemplate restTemplate) {
+    WPMedia[] wpMedias = restTemplate.getForObject("https://www.mountainviewbaptist.co.za/wp-json/wp/v2/media?per_page=100", WPMedia[].class);
+    for(WPMedia wpMedia : wpMedias) {
+      MediaItem aMediaItem = mediaItemFactory.createEntity(wpMedia);
+      mediaItemRepository.saveNewOrUpdateExistingMediaItem(aMediaItem);
+      log.info(aMediaItem.toString());
+    }
+  }
   
+  private void uploadAnyNewImages(RestTemplate restTemplate) {
+    mediaItemService.uploadAllNewSermonImages();
+    //TODO should really do this in the service from the response returned. but too lazy now. 
+    syncMediaItems(restTemplate);
+  }
 }

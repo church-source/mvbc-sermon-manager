@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="./src/main/resources/liquibase/updates/person.xml">
+
+    <changeSet id="20180328-0800" author="rowanpi">
+        <createTable tableName="media_item">
+          <column name="id" type="BIGINT(20)">
+            <constraints primaryKey="true" />
+          </column>
+          <column name="title" type="varchar(255)" />
+          <column name="path" type="varchar(512)" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

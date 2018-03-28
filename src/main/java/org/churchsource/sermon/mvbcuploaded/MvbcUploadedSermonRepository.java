@@ -26,6 +26,12 @@ public class MvbcUploadedSermonRepository extends AbstractRepository<MvbcUploade
     return series == null || series.isEmpty() ? null : series.get(0); 
   }
 
+  public MvbcUploadedSermon getMvbcUploadedSermonByFileName(String fileName) {
+    List<MvbcUploadedSermon> series = em.createNamedQuery(MvbcNamedQueryConstants.NAME_FIND_UPLOADED_SERMON_BY_FILENAME, MvbcUploadedSermon.class).setParameter("sermonAudioFileName", fileName)
+        .getResultList();
+    return series == null || series.isEmpty() ? null : series.get(0); 
+  }
+
   public void saveNewOrUpdateExistingUploadedSermon(MvbcUploadedSermon aSermon) {
     if(getMvbcUploadedSermonById(aSermon.getId()) != null) {
       update(aSermon);

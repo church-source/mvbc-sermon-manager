@@ -33,4 +33,10 @@ public class SeriesRepository extends AbstractRepository<Series> {
       save(aSeries);
     }
   }
+
+  public Series getSeriesByName(String seriesName) {
+    List<Series> series = em.createNamedQuery(SeriesNamedQueryConstants.NAME_FIND_SERIES_BY_NAME, Series.class).setParameter("name", seriesName)
+        .getResultList();
+    return series == null || series.isEmpty() ? null : series.get(0);
+  }
 }

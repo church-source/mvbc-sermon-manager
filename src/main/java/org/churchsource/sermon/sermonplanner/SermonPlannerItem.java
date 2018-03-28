@@ -25,6 +25,8 @@ import lombok.ToString;
 @NamedQueries({
   @NamedQuery(name = SermonPlannerNamedQueryConstants.QUERY_FIND_SERMON_PLANNER_ITEM_BY_ID, 
       query = SermonPlannerNamedQueryConstants.QUERY_FIND_SERMON_PLANNER_ITEM_BY_ID),
+  @NamedQuery(name = SermonPlannerNamedQueryConstants.NAME_FIND_SERMON_PLANNER_ITEM_BY_DATE_AND_TIME, 
+      query = SermonPlannerNamedQueryConstants.QUERY_FIND_SERMON_PLANNER_ITEM_BY_DATE_AND_TIME),
   @NamedQuery(name = SermonPlannerNamedQueryConstants.NAME_FIND_ALL_SERMON_PLANNER_ITEMS, 
       query = SermonPlannerNamedQueryConstants.QUERY_FIND_ALL_SERMON_PLANNER_ITEMS),
 @NamedQuery(name = SermonPlannerNamedQueryConstants.NAME_FIND_SERMON_PLANNER_ITEM_BY_UNIQUE_GOOGLE_ID, 
