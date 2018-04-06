@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, noRollbackFor=Exception.class)
 @Service
 public class RecordingFactory {
   static DateFormat sermon_date_format = new SimpleDateFormat("yyyyMMdd");

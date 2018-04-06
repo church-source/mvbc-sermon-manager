@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, noRollbackFor=Exception.class)
 @Service
 @Slf4j
 public class WpSermonToUploadFactory {
