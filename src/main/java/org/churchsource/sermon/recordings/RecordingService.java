@@ -50,7 +50,7 @@ public class RecordingService {
   @Value("${api.password}")
   private String apiPassword;
   
-  public List<Recording> getAllRecordings() {
+  public List<Recording> uploadAllNewRecordings() {
     log.warn("a test warning!");
     log.info("got here");
     File recordingPath = new File(sermonRecordingPath);

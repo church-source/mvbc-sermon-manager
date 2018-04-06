@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
   @Autowired
   RecordingService recordingService;
-  
+
   @Autowired
   MediaItemService mediaItemService;
-  
+
   @PersistenceContext
   private EntityManager entityManager;
-  
+
   @RequestMapping("/")
   public String index() {
     mediaItemService.uploadAllNewSermonImages();
-    recordingService.getAllRecordings();
+    recordingService.uploadAllNewRecordings();
     return "Greetings from Spring!";
   }
 }

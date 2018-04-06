@@ -22,6 +22,7 @@ import org.churchsource.sermon.preacher.Preacher;
 import org.churchsource.sermon.preacher.PreacherFactory;
 import org.churchsource.sermon.preacher.PreacherRepository;
 import org.churchsource.sermon.preacher.wp.WPPreacher;
+import org.churchsource.sermon.recordings.RecordingService;
 import org.churchsource.sermon.series.Series;
 import org.churchsource.sermon.series.SeriesFactory;
 import org.churchsource.sermon.series.SeriesRepository;
@@ -95,6 +96,9 @@ public class WPSermonManagerController {
 
   @Autowired
   private MediaItemService mediaItemService; 
+
+  @Autowired
+  RecordingService recordingService;
   
   @GetMapping("/preacher/{id}")
   public Preacher getPreacher(@PathVariable Long id) {
@@ -116,8 +120,13 @@ public class WPSermonManagerController {
     syncSermonBooks(restTemplate);
     syncUploadedSermons(restTemplate);
     syncMediaItems(restTemplate);
-
+    uploadAndSyncAnyNewRecordings(restTemplate);
     return null;
+  }
+
+  private void uploadAndSyncAnyNewRecordings(RestTemplate restTemplate) throws MalformedURLException {
+    recordingService.uploadAllNewRecordings();
+    syncUploadedSermons(restTemplate);
   }
 
   private void syncSermonSeries(RestTemplate restTemplate) {
