@@ -63,35 +63,36 @@ public class WpSermonToUploadFactory {
     if(alreadyUploadedSermon == null) {
       log.info("New Sermon: " + aRecording.toString());
       SermonPlannerItem item = sermonPlannerRepository.getSermonPlannerItemByDateAndServiceTime(aRecording.getDate(), aRecording.getServiceAmOrPm());
-      log.info("New Sermon Details From Planner: " + item);
-      MediaItem mediaItem = mediaItemRepository.getMediaItemByFileTitle(new SimpleDateFormat("yyyyMMdd", Locale.getDefault()). format(item.getDate())+ "-" + item.getAmOrPm().toString().toLowerCase());
-      if(mediaItem  == null) {
-        mediaItem = mediaItemRepository.getMediaItemByFileTitle(new SimpleDateFormat("yyyyMMdd", Locale.getDefault()). format(item.getDate())+ "-" + item.getAmOrPm().toString().toUpperCase());
+      if(item != null) {
+        log.info("New Sermon Details From Planner: " + item);
+        MediaItem mediaItem = mediaItemRepository.getMediaItemByFileTitle(new SimpleDateFormat("yyyyMMdd", Locale.getDefault()). format(item.getDate())+ "-" + item.getAmOrPm().toString().toLowerCase());
+        if(mediaItem  == null) {
+          mediaItem = mediaItemRepository.getMediaItemByFileTitle(new SimpleDateFormat("yyyyMMdd", Locale.getDefault()). format(item.getDate())+ "-" + item.getAmOrPm().toString().toUpperCase());
+        }
+        if(mediaItem  != null) {
+          log.info("Media Item of New Sermon: " + mediaItem.getId());
+          sermonToUpload.setFeaturedMedia(mediaItem.getId());
+          sermonToUpload.setStatus("publish");
+          sermonToUpload.setType("wpfc_sermon");
+          sermonToUpload.setTitle(item.getTitle());
+          sermonToUpload.setSermonAudio("https://mvsongs.co.za/gdrive/sermons/" + aRecording.getFileName());
+          sermonToUpload.setSermonDescription(item.getPassage());
+          sermonToUpload.setSermonAudioDuration(aRecording.getRecordingLength());
+          setPreacher(sermonToUpload, item);
+          setSeries(sermonToUpload, item);
+          setServiceType(sermonToUpload, item);
+          //TODO set sermon date
+          
+          //TODO leave book out for now. 
+          
+          sermonToUpload.setBiblePassage(item.getPassage());
+          sermonToUpload.setSermonDate((aRecording.getDate().getTime() / 1000L) + 7201L);
+          return sermonToUpload;
+        }
+      } else {
+        log.info("Existing Sermon: " + aRecording.toString());
       }
-      if(mediaItem  != null) {
-        log.info("Media Item of New Sermon: " + mediaItem.getId());
-        sermonToUpload.setFeaturedMedia(mediaItem.getId());
-        sermonToUpload.setStatus("publish");
-        sermonToUpload.setType("wpfc_sermon");
-        sermonToUpload.setTitle(item.getTitle());
-        sermonToUpload.setSermonAudio("https://mvsongs.co.za/gdrive/sermons/" + aRecording.getFileName());
-        sermonToUpload.setSermonDescription(item.getPassage());
-        sermonToUpload.setSermonAudioDuration(aRecording.getRecordingLength());
-        setPreacher(sermonToUpload, item);
-        setSeries(sermonToUpload, item);
-        setServiceType(sermonToUpload, item);
-        //TODO set sermon date
-        
-        //TODO leave book out for now. 
-        
-        sermonToUpload.setBiblePassage(item.getPassage());
-        sermonToUpload.setSermonDate((aRecording.getDate().getTime() / 1000L) + 7201L);
-        return sermonToUpload;
-      }
-    } else {
-      log.info("Existing Sermon: " + aRecording.toString());
     }
-    
     return null;
   }
 

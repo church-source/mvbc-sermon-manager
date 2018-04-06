@@ -72,6 +72,7 @@ public class RecordingService {
           }
       } catch (Exception e) {
         log.error(e.getMessage());
+        e.printStackTrace();
       }
     }
     return null;
@@ -112,7 +113,7 @@ public class RecordingService {
     else {
         String path = f.getPath();
         log.info("checking file: " + path);
-        if (path.endsWith(".mp3")) {
+        if (path.endsWith(".mp3") && !path.endsWith("_red.mp3")) {
             log.info("Adding file: " + f.getPath());
             mp3Paths.add(f.getPath());
         }
