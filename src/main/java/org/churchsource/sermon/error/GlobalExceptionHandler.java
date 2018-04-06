@@ -27,6 +27,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     log.error(exception.getMessage(), exception);
     log.info(exception.getMessage());
     log.info(exception.getStackTrace().toString());
+    exception.printStackTrace();
     return ResponseEntity
         .status(INTERNAL_SERVER_ERROR)
         .contentType(MediaType.APPLICATION_JSON)

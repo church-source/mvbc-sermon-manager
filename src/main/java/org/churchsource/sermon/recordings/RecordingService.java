@@ -58,18 +58,18 @@ public class RecordingService {
     log.info("Recording Path: " + sermonRecordingPath);
     List<String> mp3Paths = new ArrayList<String>();
     getMp3s(recordingPath, mp3Paths);
-    for(String path : mp3Paths) { 
-      File recordingFile = new File(path);
+    for(String path : mp3Paths) {
       try {
+        File recordingFile = new File(path);
         Recording aRecording = recordingFactory.createRecording(recordingFile);
         
-          WPMvbcSermonToUpload sermonToUpload = sermonUploadFactory.createSermonToUpload(aRecording);
-          
-          if(sermonToUpload != null) {
-            log.info("Do Test Update");
-            log.info(sermonToUpload.toString());
-            uploadSermon(sermonToUpload);
-          }
+        WPMvbcSermonToUpload sermonToUpload = sermonUploadFactory.createSermonToUpload(aRecording);
+        
+        if(sermonToUpload != null) {
+          log.info("Do Test Update");
+          log.info(sermonToUpload.toString());
+          uploadSermon(sermonToUpload);
+        }
       } catch (Exception e) {
         log.error(e.getMessage());
         e.printStackTrace();
