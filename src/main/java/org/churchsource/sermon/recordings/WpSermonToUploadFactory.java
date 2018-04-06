@@ -57,7 +57,9 @@ public class WpSermonToUploadFactory {
 
   //TODO reusing this probably should create a new one. 
   public WPMvbcSermonToUpload createSermonToUpload(Recording aRecording) {
-    WPMvbcSermonToUpload sermonToUpload  = new WPMvbcSermonToUpload();
+    try {
+      WPMvbcSermonToUpload sermonToUpload  = new WPMvbcSermonToUpload();
+
 
     MvbcUploadedSermon alreadyUploadedSermon = mvbcUploadedSermonRepository.getMvbcUploadedSermonByFileName(aRecording.getFileName());
     if(alreadyUploadedSermon == null) {
@@ -94,6 +96,9 @@ public class WpSermonToUploadFactory {
       }
     }
     return null;
+    }catch(Exception e) {
+      return null;
+    }
   }
 
   private void setServiceType(WPMvbcSermonToUpload sermonToUpload, SermonPlannerItem item) {
