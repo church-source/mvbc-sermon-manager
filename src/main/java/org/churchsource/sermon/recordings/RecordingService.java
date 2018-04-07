@@ -67,7 +67,6 @@ public class RecordingService {
         }
       } catch (Exception e) {
         log.error(e.getMessage());
-        e.printStackTrace();
       }
     }
     return null;
