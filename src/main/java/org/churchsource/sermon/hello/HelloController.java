@@ -22,8 +22,6 @@ public class HelloController {
 
   @RequestMapping("/")
   public String index() {
-    mediaItemService.uploadAllNewSermonImages();
-    recordingService.uploadAllNewRecordings();
-    return "Greetings from Spring!";
+    return "Hello";
   }
 }
