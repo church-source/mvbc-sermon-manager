@@ -120,6 +120,7 @@ public class WPSermonManagerController {
     syncSermonBooks(restTemplate);
     syncUploadedSermons(restTemplate);
     syncMediaItems(restTemplate);
+    uploadAnyNewImages(restTemplate);
     uploadAndSyncAnyNewRecordings(restTemplate);
     return null;
   }
