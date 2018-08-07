@@ -34,6 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WpSermonToUploadFactory {
 
+  private static final String DEFAULT_JPG = "default.jpg";
+
   @Autowired
   private MvbcUploadedSermonRepository mvbcUploadedSermonRepository;
 
@@ -71,6 +73,9 @@ public class WpSermonToUploadFactory {
         if(mediaItem  == null) {
           mediaItem = mediaItemRepository.getMediaItemByFileTitle(new SimpleDateFormat("yyyyMMdd", Locale.getDefault()). format(item.getDate())+ "-" + item.getAmOrPm().toString().toUpperCase());
         }
+        if(mediaItem  == null) {
+          mediaItem = mediaItemRepository.getMediaItemByFileTitle(DEFAULT_JPG);
+        }
         if(mediaItem  != null) {
           log.info("Media Item of New Sermon: " + mediaItem.getId());
           sermonToUpload.setFeaturedMedia(mediaItem.getId());
@@ -84,9 +89,9 @@ public class WpSermonToUploadFactory {
           setSeries(sermonToUpload, item);
           setServiceType(sermonToUpload, item);
           //TODO set sermon date
-          
+
           //TODO leave book out for now. 
-          
+
           sermonToUpload.setBiblePassage(item.getPassage());
           sermonToUpload.setSermonDate((aRecording.getDate().getTime() / 1000L) + 7201L);
           return sermonToUpload;
