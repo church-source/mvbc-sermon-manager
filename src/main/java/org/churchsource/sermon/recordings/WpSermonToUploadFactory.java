@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WpSermonToUploadFactory {
 
-  private static final String DEFAULT_JPG = "default.jpg";
+  private static final String DEFAULT_JPG = "default";
 
   @Autowired
   private MvbcUploadedSermonRepository mvbcUploadedSermonRepository;
